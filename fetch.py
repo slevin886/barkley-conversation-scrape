@@ -15,4 +15,18 @@ for letter in words:
 		letter = letter.replace('BARKLEY', '').replace("<p>", '').replace('</span>', '').replace('</p>', '')
 		chain += letter
 		
-	
+
+
+#Creates a list of all of the countries of the world and cleans it a bit
+
+my_url2 = 'https://www.countries-ofthe-world.com/all-countries.html'
+uClient2 = urlopen(my_url2)
+page_html2 = uClient2.read()
+uClient2.close()
+page_soup2 = BeautifulSoup(page_html2, "html.parser")
+containers2 = page_soup2.find_all("div", {"class":"container list-container"})
+something2 = str(containers2[0])
+countries = something2.split("<li>")
+del countries[0]
+#cleans the list of countries 
+mylist_countries = map(lambda each:each.strip("</li>\n"), countries)
